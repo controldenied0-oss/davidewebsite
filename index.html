@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Davide Drum Academy</title>
+  <meta name="description" content="Trinity and Rockschool Drum lessons and exam prep" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&family=Libre+Franklin:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #4f2376;
+      --purple-dark: #40205f;
+      --green: #8cc63e;
+      --text: #666;
+      --bg-soft: #f6f0ee;
+      --border: #e4ddd9;
+      --max: 1080px;
+      --shadow: 0 12px 28px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", Arial, sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.7em;
+      font-weight: 500;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4, p, ul { margin: 0; }
+
+    .container {
+      width: 80%;
+      max-width: var(--max);
+      margin: auto;
+      position: relative;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+
+    .header-inner {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+      font-family: "Open Sans", Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .nav a {
+      color: #444;
+      line-height: 58px;
+      white-space: nowrap;
+      transition: color .18s ease, opacity .18s ease;
+    }
+
+    .nav a:hover { color: var(--purple); }
+
+    .nav-toggle {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #333;
+      margin: 0 auto;
+      position: relative;
+      content: "";
+    }
+
+    .nav-toggle span::before { position: absolute; top: -6px; }
+    .nav-toggle span::after { position: absolute; top: 6px; }
+
+    .hero {
+      position: relative;
+      padding: 150px 0 200px;
+      background:
+        linear-gradient(rgba(79,35,118,0.64), rgba(79,35,118,0.64)),
+        url('https://chiswickdrumacademy.co.uk/wp-content/uploads/2023/08/gabriel-barletta-lWcaUVJ39Y-unsplash.jpg') center center / cover no-repeat;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 40px;
+      background: #fff;
+      clip-path: ellipse(70% 100% at 50% 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: "Inria Serif", Georgia, serif;
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.15em;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .hero h2 {
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: clamp(24px, 3vw, 32px);
+      line-height: 1.35em;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      min-width: 205px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+      transition: all .2s ease;
+    }
+
+    .btn-outline {
+      border: 2px solid #fff;
+      color: #fff;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .btn-solid {
+      border: 2px solid var(--purple);
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .btn-solid:hover {
+      background: var(--purple-dark);
+      border-color: var(--purple-dark);
+    }
+
+    .section {
+      padding: 54px 0;
+    }
+
+    .section-soft {
+      background: var(--bg-soft);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .split-text {
+      text-align: left;
+    }
+
+    .split-text p {
+      font-size: 16px;
+      line-height: 1.9em;
+      color: #6f6f6f;
+      padding-bottom: 16px;
+      max-width: 560px;
+    }
+
+    .points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+      max-width: 520px;
+    }
+
+    .points li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.45em;
+      color: var(--purple);
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .points li::before{
+      content: counter(point);
+      counter-increment: point;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--purple);
+      color:#fff;
+      font-size:14px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 26px;
+    }
+
+    .points{counter-reset:point;}
+
+    .points img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex: 0 0 38px;
+    }
+
+    .split-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .split-image img {
+      width: 100%;
+      max-width: 390px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .heading-block {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .heading-block h2,
+    .cta h2 {
+      font-family: "Inria Serif", Georgia, serif;
+      color: var(--purple);
+      font-size: clamp(20px, 2.6vw, 28px);
+      line-height: 1.2em;
+      font-weight: 400;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 14px auto 34px;
+      max-width: 320px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #cfcfcf;
+      flex: 1;
+    }
+
+    .divider span {
+      color: var(--purple);
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .reviews-box {
+      background: #fff;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 14px 24px 0;
+    }
+
+    .review-quote .mini {
+      font-size: 16px;
+      line-height: 1.45em;
+      color: var(--purple);
+      font-family: "Libre Franklin", Arial, sans-serif;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .review-quote p {
+      font-size: 14px;
+      line-height: 1.9em;
+      color: #707070;
+      max-width: 770px;
+      margin: 0 auto 10px;
+    }
+
+    .review-quote .name {
+      font-weight: 700;
+      color: var(--purple);
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      text-align: center;
+      padding-top: 10px;
+    }
+
+    .stat-number {
+      font-family: "Libre Franklin", Arial, sans-serif;
+      color: var(--purple);
+      font-size: clamp(30px, 4.2vw, 50px);
+      line-height: 1;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-family: "Libre Franklin", Arial, sans-serif;
+      color: var(--purple);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.25em;
+      font-weight: 700;
+    }
+
+    .cta {
+      text-align: center;
+      padding-top: 8px;
+    }
+
+    .cta h2 {
+      margin-bottom: 24px;
+    }
+
+    .footer {
+      background: var(--purple);
+      color: #fff;
+      margin-top: 56px;
+      padding: 34px 0 22px;
+    }
+
+    .footer-top {
+      text-align: center;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .footer-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer-bottom a:hover { text-decoration: underline; }
+
+    @media (max-width: 980px) {
+      .nav-toggle { display: block; }
+
+      .nav {
+        display: none;
+        position: absolute;
+        top: 58px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0;
+      }
+
+      .nav.open { display: flex; }
+
+      .nav a {
+        line-height: 1.3;
+        width: 100%;
+        padding: 12px 18px;
+      }
+
+      .split,
+      .stats,
+      .footer-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .split {
+        gap: 30px;
+      }
+
+      .split-text {
+        text-align: center;
+      }
+
+      .split-text p,
+      .points {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .points li {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container { width: 92%; }
+      .hero { padding: 100px 0 140px; }
+      .split-text p { font-size: 15px; }
+      .points li { font-size: 14px; }
+      .review-quote .mini { font-size: 15px; }
+      .review-quote p { font-size: 14px; }
+      .footer-top { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+        <span></span>
+      </button>
+
+      <nav class="nav" id="mainNav">
+        <a href="about.html">About Us</a>
+        <a href="inperson.html">In Person Drum Lessons</a>
+        <a href="online.html">Online Drum Lessons</a>
+        <a href="prices.html">Drum Lesson Prices</a>
+        <a href="trial.html">Book Your Trial Lesson</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <h1>Davide Drum Academy</h1>
+        
+        <div class="hero-actions">
+          <a class="btn btn-outline" href="tel:07483255124">07483 255 124</a>
+          <a class="btn btn-solid" href="contact.html">Book a lesson</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container split">
+        <div class="split-text">
+          <p>We offer drum lessons for all ages and all levels. Through engaging and innovative teaching methods, we aim to unlock and nurture your creative flair and provide lifelong guidance in music.</p>
+          <p>Whether you are a complete beginner, returning to the kit after time away, or preparing for Trinity or Rockschool drum exams, lessons are tailored around your pace, your goals, and the way you learn best. Students build confidence in timing, coordination, technique, reading, groove, and overall musicianship while still keeping the process enjoyable and motivating from week to week.</p>
+          <p>Our aim is not just to teach songs or exercises in isolation, but to help each student grow into a capable and expressive drummer with a strong musical foundation.</p>
+          <ul class="points">
+            <li>Learn &amp; Have Fun</li>
+            <li>At Your Own Pace</li>
+            <li>In-person or Online</li>
+            <li>Drum Exam Prep</li>
+          </ul>
+        </div>
+
+        <div class="split-image">
+          <img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=900&q=80" alt="Young drummer playing a drum kit" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews">
+      <div class="container">
+        <div class="heading-block">
+          <h2>Client Reviews</h2>
+          <div class="divider"><span>★</span></div>
+        </div>
+
+        <div class="reviews-box">
+          <div class="review-quote">
+            <div class="mini"><strong><em>“Incredible, friendly teachers and the drums in the room sound simply fantastic”</em></strong></div>
+            <p>Definitely did the right choice joining Davide Drum Academy for various reasons. It’s really convenient for me as well as I live really close to the studio. Friendly teachers and the drums in the room sound simply fantastic. I had switched from many tutors in the past that I was simply not happy with but now I certainly found my space and feel that I’m not wasting my money. I highly recommend this place.</p>
+            <div class="name">Yanna</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stats-section">
+      <div class="container">
+        <div class="stats">
+          <div>
+            <div class="stat-number">1000+</div>
+            <div class="stat-label">Drum grooves</div>
+          </div>
+          <div>
+            <div class="stat-number">650+</div>
+            <div class="stat-label">Lessons Taught</div>
+          </div>
+          <div>
+            <div class="stat-number">19</div>
+            <div class="stat-label">Exams Passed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="container">
+        <h2>Take your drumming skills to the next level!</h2>
+        <a class="btn btn-solid" href="contact.html">Book a lesson today</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">Classes available for all skill levels, ages 6 and above.</div>
+      <div class="footer-bottom">
+        <div>© 2026 Davide Drum Academy</div>
+        <div><a href="privacy.html">Privacy and Terms &amp; Conditions</a></div>
+        <div><a href="contact.html">Contact</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  </script>
+</body>
+</html>
